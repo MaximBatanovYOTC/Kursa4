@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище autoservice_kpModelContainer" CdmEntityContainer="autoservice_kpEntities">
+    <EntitySetMapping Name="AutoserviceMax">
+      <EntityTypeMapping TypeName="autoservice_kpModel.AutoserviceMax">
+        <MappingFragment StoreEntitySet="AutoserviceMax">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyMax">
+      <EntityTypeMapping TypeName="autoservice_kpModel.CompanyMax">
+        <MappingFragment StoreEntitySet="CompanyMax">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractsMax">
+      <EntityTypeMapping TypeName="autoservice_kpModel.ContractsMax">
+        <MappingFragment StoreEntitySet="ContractsMax">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleMax">
+      <EntityTypeMapping TypeName="autoservice_kpModel.RoleMax">
+        <MappingFragment StoreEntitySet="RoleMax">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="autoservice_kpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AutoserviceMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ContractId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ContractsMax" Relationship="Self.FK_AutoserviceMax_ContractsMax" FromRole="AutoserviceMax" ToRole="ContractsMax" />
+    <NavigationProperty Name="RoleMax" Relationship="Self.FK_AutoserviceMax_RoleMax" FromRole="AutoserviceMax" ToRole="RoleMax" />
+  </EntityType>
+  <EntityType Name="CompanyMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="DateTime" Precision="3" />
+    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ContractsMax" Relationship="Self.FK_ContractsMax_CompanyMax" FromRole="CompanyMax" ToRole="ContractsMax" />
+  </EntityType>
+  <EntityType Name="ContractsMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Photo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Count" Type="Int32" />
+    <NavigationProperty Name="AutoserviceMax" Relationship="Self.FK_AutoserviceMax_ContractsMax" FromRole="ContractsMax" ToRole="AutoserviceMax" />
+    <NavigationProperty Name="CompanyMax" Relationship="Self.FK_ContractsMax_CompanyMax" FromRole="ContractsMax" ToRole="CompanyMax" />
+  </EntityType>
+  <EntityType Name="RoleMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AutoserviceMax" Relationship="Self.FK_AutoserviceMax_RoleMax" FromRole="RoleMax" ToRole="AutoserviceMax" />
+  </EntityType>
+  <Association Name="FK_AutoserviceMax_ContractsMax">
+    <End Role="ContractsMax" Type="Self.ContractsMax" Multiplicity="1" />
+    <End Role="AutoserviceMax" Type="Self.AutoserviceMax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractsMax">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AutoserviceMax">
+        <PropertyRef Name="ContractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AutoserviceMax_RoleMax">
+    <End Role="RoleMax" Type="Self.RoleMax" Multiplicity="1" />
+    <End Role="AutoserviceMax" Type="Self.AutoserviceMax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleMax">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AutoserviceMax">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractsMax_CompanyMax">
+    <End Role="CompanyMax" Type="Self.CompanyMax" Multiplicity="1" />
+    <End Role="ContractsMax" Type="Self.ContractsMax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMax">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContractsMax">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="autoservice_kpEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AutoserviceMax" EntityType="Self.AutoserviceMax" />
+    <EntitySet Name="CompanyMax" EntityType="Self.CompanyMax" />
+    <EntitySet Name="ContractsMax" EntityType="Self.ContractsMax" />
+    <EntitySet Name="RoleMax" EntityType="Self.RoleMax" />
+    <AssociationSet Name="FK_AutoserviceMax_ContractsMax" Association="Self.FK_AutoserviceMax_ContractsMax">
+      <End Role="ContractsMax" EntitySet="ContractsMax" />
+      <End Role="AutoserviceMax" EntitySet="AutoserviceMax" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AutoserviceMax_RoleMax" Association="Self.FK_AutoserviceMax_RoleMax">
+      <End Role="RoleMax" EntitySet="RoleMax" />
+      <End Role="AutoserviceMax" EntitySet="AutoserviceMax" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractsMax_CompanyMax" Association="Self.FK_ContractsMax_CompanyMax">
+      <End Role="CompanyMax" EntitySet="CompanyMax" />
+      <End Role="ContractsMax" EntitySet="ContractsMax" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

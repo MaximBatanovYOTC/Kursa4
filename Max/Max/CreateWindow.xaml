@@ -1,0 +1,51 @@
+﻿<Window x:Class="Max.CreateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:max="clr-namespace:Max" d:DataContext="{d:DesignInstance Type=max:ClientList}"
+        mc:Ignorable="d"
+        Title="Заказ" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Image        
+            Height="280" 
+            Width="280" 
+            Source="{Binding CurrentService.ImagePreview}" />
+        <StackPanel Margin="5"  Grid.Column="1">
+            <Label Content="Название авто&#xD;&#xA;"/>
+            <TextBox Text="{Binding CurrentService.Number}"/>
+            <Label Content="Цена"/>
+            <TextBox Text="{Binding CurrentService.Price}"/>
+            <Label Content="Дата заключения контракта"/>
+            <TextBox Text="{Binding CurrentService.StartTimeText}"/>
+
+            <Label Content="Выбор клиента"/>
+            <ComboBox
+                HorizontalAlignment="left"
+                ItemsSource="{Binding ClientList}"
+                SelectedItem="{Binding CurrentService.AutoserviceMax}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Fullname}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox> 
+            <Label Content="Выбор cостояния авто"/>
+            <ComboBox
+                HorizontalAlignment="left"
+                ItemsSource="{Binding RoleList}"
+                SelectedItem="{Binding CurrentService.RoleMax}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Title}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Margin="5" HorizontalAlignment="Left" Click="GetImageButton_Click">Получить картинку</Button>
+            <Button Margin="5" HorizontalAlignment="Left" Click="SaveButton_Click">Сохранить</Button>
+        </StackPanel>
+    </Grid>
+</Window>

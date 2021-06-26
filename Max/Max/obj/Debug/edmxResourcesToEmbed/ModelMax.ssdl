@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище autoservice_kpModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AutoserviceMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNum" Type="nchar" MaxLength="10" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CompanyMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Service" Type="nvarchar" MaxLength="50" />
+    <Property Name="Duration" Type="datetime" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ContractsMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Price" Type="money" />
+    <Property Name="Number" Type="nchar" MaxLength="10" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="AutoserviceId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Photo" Type="nchar" MaxLength="10" />
+    <Property Name="Count" Type="int" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoleMax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_ContractsMax_AutoserviceMax">
+    <End Role="AutoserviceMax" Type="Self.AutoserviceMax" Multiplicity="1" />
+    <End Role="ContractsMax" Type="Self.ContractsMax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AutoserviceMax">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContractsMax">
+        <PropertyRef Name="AutoserviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractsMax_CompanyMax">
+    <End Role="CompanyMax" Type="Self.CompanyMax" Multiplicity="1" />
+    <End Role="ContractsMax" Type="Self.ContractsMax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMax">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContractsMax">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractsMax_RoleMax">
+    <End Role="RoleMax" Type="Self.RoleMax" Multiplicity="1" />
+    <End Role="ContractsMax" Type="Self.ContractsMax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleMax">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContractsMax">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище autoservice_kpModelContainer">
+    <EntitySet Name="AutoserviceMax" EntityType="Self.AutoserviceMax" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyMax" EntityType="Self.CompanyMax" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractsMax" EntityType="Self.ContractsMax" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleMax" EntityType="Self.RoleMax" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ContractsMax_AutoserviceMax" Association="Self.FK_ContractsMax_AutoserviceMax">
+      <End Role="AutoserviceMax" EntitySet="AutoserviceMax" />
+      <End Role="ContractsMax" EntitySet="ContractsMax" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractsMax_CompanyMax" Association="Self.FK_ContractsMax_CompanyMax">
+      <End Role="CompanyMax" EntitySet="CompanyMax" />
+      <End Role="ContractsMax" EntitySet="ContractsMax" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractsMax_RoleMax" Association="Self.FK_ContractsMax_RoleMax">
+      <End Role="RoleMax" EntitySet="RoleMax" />
+      <End Role="ContractsMax" EntitySet="ContractsMax" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
