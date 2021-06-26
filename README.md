@@ -48,8 +48,6 @@ https://github.com/MaximBatanovYOTC/Kursa4
 ### Диаграмма Use Case:
 
 ![Use case](./img/UseCase.png)
-### Диаграмма ER:
-![ER диаграмма](./img/ERD.png)
 ### Диаграмма Последовательности:
 ![State Mashine](./img/Sequence.png)
 ### CСпецификация прецентдентов Use Case:
